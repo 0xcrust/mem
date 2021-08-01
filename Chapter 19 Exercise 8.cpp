@@ -1,16 +1,10 @@
-﻿//8. Implement an allocator (19.3.7) using the basic allocation functions malloc() and free() (B.11.4).
-// Get vector as defined by the end of 19.4 to work for a few simple test cases.
-// Hint: Look up "placement new" and "explicit call of destructor" in a complete C++ reference.
+﻿
+/*
+8. Implement an allocator (19.3.7) using the basic allocation functions malloc() and free() (B.11.4).
+Hint: Look up "placement new" and "explicit call of destructor" in a complete C++ reference.
 
-//p = malloc(s) Allocate s uninitialized bytes on the free store;
-//p = 0 if s bytes could not be allocated.
-
-//free(p) Deallocate the memory pointed to by p;
-//p must be a pointer returned by malloc(), calloc(), or realloc().
-
-
-//9. Re - implement vector::operator=() (§19.2.5) using an allocator(§19.3.7)
-//for memory management.
+9. Re - implement vector::operator=() (§19.2.5) using an allocator(§19.3.7) for memory management.
+*/
 
 
 
@@ -30,7 +24,7 @@ public:
 template<typename T> T* allocator<T>::allocate(int n) // allocate space for n objects of type T
 {
     s = size * n;
-    p = malloc(s);
+    p = malloc(s);  //p = malloc(s) Allocate s uninitialized bytes on the free store;
     return p;
 }
 
@@ -39,9 +33,9 @@ template<typename T> void allocator<T>::deallocate(T* p, int n) // deallocate n 
 {
     int a = 0;
     while (a < n) { 
-        free(p);
-        p += size;
-        a++;
+        free(p);    //free(p) Deallocate the memory pointed to by p; p must be a pointer returned by malloc(), calloc(), or realloc().
+        p += size;  
+        a++;         
     }
 }
 
